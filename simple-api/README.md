@@ -1,25 +1,19 @@
-
-![CF](http://i.imgur.com/7v5ASc8.png) LAB 15
+![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## API SERVER
+## HTTP and REST
 xa
-### Author: Erin Trainor & Aaron Ferris
+### Author: Erin Trainor
 
 ### Links and Resources
-* [pull request](pullrequest)
-* [travis]()
+* [pull request](https://github.com/401-advanced-javascript-401d29/simple-api/pull/6)
+* [Resubmit pull request](https://github.com/401-advanced-javascript-401d29/simple-api/pull/7)
 * [front-end](https://codesandbox.io/s/w638oyk7o8)
 
 #### Documentation
 * [swagger](./docs/swagger.json)
-* [jsdoc]()
 
 ### Setup
-
-
-
-
 
 #### Terminal Commands to Manipulate the API
 * Categories
