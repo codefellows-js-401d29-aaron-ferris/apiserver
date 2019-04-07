@@ -4,11 +4,11 @@
 ## API Server
 
 ### Author: Erin Trainor and Aaron Ferris
-[![Build Status](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14.svg?branch=submission)](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14)
+[![Build Status](https://travis-ci.com/js401-ferris-trainor-apiserver/apiserver.svg?branch=master)](https://travis-ci.com/js401-ferris-trainor-apiserver/apiserver)
 
 ### Links and Resources
-* [repo](https://github.com/401-advanced-javascript-401d29/lab-14/pull/1)
-* [travis](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14)
+* [repo](https://github.com/js401-ferris-trainor-apiserver/apiserver/pull/2)
+* [travis](https://travis-ci.com/js401-ferris-trainor-apiserver/apiserver)
 * [back-end](https://api-auth-server-401javascript.herokuapp.com/)
 
 #### Documentation
