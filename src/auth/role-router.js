@@ -3,7 +3,7 @@
 const express = require('express');
 const rolesRouter = express.Router();
 const auth = require('./middleware.js');
-const Role = require('./roles-model');
+const Role = require('../models/auth/roles/roles-model');
 
 rolesRouter.get('/public-stuff', (req, res, next) => {
   res.status(200).send('Welcome, you are not special...everyone can read this.');
