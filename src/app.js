@@ -4,18 +4,14 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const swagger = require('swagger-ui-express');
-
-///MOVE TO FINAL ROUTER FILE///////////////////
-/////////////////////////////////////////////////
+// const swagger = require('swagger-ui-express');
 
 // Esoteric Resources
-const errorHandler = require( './middleware/500.js');
-const notFound = require( './middleware/404.js' );
-const authRouter = require( './auth/router.js' );
-const roleRouter = require('./auth/role-router.js');
-const apiRouter = require( `./routers/api/v1` );
-app.use(apiRouter); //fix the file path!!
+const errorHandler = require( './error-middleware/500.js');
+const notFound = require( './error-middleware/404.js' );
+const authRouter = require( './routers/auth/router.js' );
+const roleRouter = require('./routers/auth/role-router.js');
+const apiRouter = require( `./routers/api/v1.js` );
 
 // Prepare the express app
 const app = express();
@@ -26,12 +22,13 @@ app.use(morgan('dev'));
 
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(apiRouter);
 
 //Documentation Resources
 app.use('/docs', express.static('docs'));
 
-const swaggerDocs = require('docs/config/swagger.json');
-apiRouter.get('/swagger', swagger.server, swagger.setup(swaggerDocs));
+// const swaggerDocs = require('../docs/config/swagger.json');
+// apiRouter.get('/swagger', swagger.server, swagger.setup(swaggerDocs));
 // apiRouter.use('/api/v1/doc', swagger.serve, swagger.setup(swaggerDocs));
 
 // Routes

@@ -2,7 +2,7 @@
 
 const express = require('express');
 const rolesRouter = express.Router();
-const Role = require('./roles-model');
+const Role = require('../../models/auth/roles/roles-model.js');
 
 /**
  * @name rolesRouter.post()

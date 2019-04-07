@@ -1,6 +1,6 @@
 'use strict';
 
-const User = require('./users-model.js');
+const User = require('../models/auth/users/users-model.js');
 
 module.exports = (capability) => {
   

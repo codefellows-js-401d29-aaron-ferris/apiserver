@@ -5,8 +5,8 @@
  * @module models/players/players-model
  */
 
-const Model = require('../mongo-model.js');
-const schema = require('./players-schema.js');
+const Model = require('../server/mongo-model.js');
+const schema = require('./players-schema');
 
 class Players extends Model {}
 /**

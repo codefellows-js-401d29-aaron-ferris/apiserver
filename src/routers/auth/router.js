@@ -3,9 +3,9 @@
 const express = require('express');
 const authRouter = express.Router();
 
-const User = require('./users-model.js');
-const auth = require('./middleware.js');
-const oauth = require('./oauth/google.js');
+const User = require('../../models/auth/users/users-model.js');
+const auth = require('../../auth-middleware/middleware.js');
+const oauth = require('../../oauth/google.js');
 
 authRouter.post('/signup', (req, res, next) => {
   let user = new User(req.body);

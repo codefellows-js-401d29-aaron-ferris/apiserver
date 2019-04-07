@@ -1,25 +1,30 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Access Control (ACL)
+## API Server
 
-### Author: Erin Trainor
+### Author: Erin Trainor and Aaron Ferris
 [![Build Status](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14.svg?branch=submission)](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14)
 
 ### Links and Resources
 * [repo](https://github.com/401-advanced-javascript-401d29/lab-14/pull/1)
 * [travis](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14)
-* [back-end](https://stormy-hollows-76214.herokuapp.com) (when applicable)
+* [back-end](https://api-auth-server-401javascript.herokuapp.com/)
 
 #### Documentation
-* [jsdoc](https://stormy-hollows-76214.herokuapp.com/docs)
+* [jsdoc](https://api-auth-server-401javascript.herokuapp.com/docs)
 
 
 ### Setup
 #### `.env` requirements
 * `PORT` - 3000
 * `MONGODB_URI` - MONGODB_URI=MONGODB_URI=mongodb://localhost:27017/users
-* `SECRET` - Puppy
+* `SECRET` - TMNT
+* Add a role
+  * echo '{"role":"superuser", "capabilities":["create","read","update","delete", "superuser"]}' | http :3000/roles
+  * echo '{"role":"admin", "capabilities":["create","read","update","delete"]}' | http :3000/roles
+  * echo '{"role":"editor", "capabilities":["create", "read", "update"]}' | http :3000/roles
+  * echo '{"role":"user", "capabilities":["read"]}' | http :3000/roles
 
 #### Running the app
 * To run Mongo
@@ -32,11 +37,6 @@
         * nodemon
   
 #### Terminal commands to manipulate databaes
-* Add a role
-  * echo '{"role":"superuser", "capabilities":["create","read","update","delete", "superuser"]}' | http :3000/roles
-  * echo '{"role":"admin", "capabilities":["create","read","update","delete"]}' | http :3000/roles
-  * echo '{"role":"editor", "capabilities":["create", "read", "update"]}' | http :3000/roles
-  * echo '{"role":"user", "capabilities":["read"]}' | http :3000/roles
 * Add a User
   * echo '{"username":"michelangelo", "password":"michelangelo", "role":"superuser"}' | http post :3000/signup
   * echo '{"username":"leonardo", "password":"leonardo", "role":"admin"}' | http post :3000/signup
@@ -47,15 +47,23 @@
   * http post :3000/signin -a leonardo:leonardo
   * http post :3000/signin -a donatello:donatello
   * http post :3000/signin -a raphael:raphael
-* Check if a user is authorized (after signing-in) - The user that is currently signed in will determine the messages sent
-  * http get :3000/public-stuff "Authorization: Bearer ${access_token}"
-  * http get :3000/hidden-stuff "Authorization: Bearer ${access_token}"
-  * http get :3000/something-to-read "Authorization: Bearer ${access_token}"
-  * http post :3000/create-a-thing "Authorization: Bearer ${access_token}"
-  * http put :3000/update "Authorization: Bearer ${access_token}"
-  * http patch :3000/jp "Authorization: Bearer ${access_token}"
-  * http delete :3000/bye-bye "Authorization: Bearer ${access_token}"
-  * http get :3000/everything "Authorization: Bearer ${access_token}"
+* Add a team (after signing-in) - The signed in user must have create permission (all users except raphael)
+  * echo '{"name":"TMNT"}' | http POST :3000/api/teams "Authorization: Bearer ${access_token}"
+  * echo '{"name":"Foot Clan"}' | http POST :3000/api/teams "Authorization: Bearer ${access_token}"
+* Add a player (after signing-in) - The signed in user must have create permission
+  * echo '{"name":"Shredder", "position":"P", "throws":"R", "bats":"R", "team":"Foot Clan"}' | http POST :3000/api/players "Authorization: Bearer ${access_token}"
+  * echo '{"name":"April", "position":"SS", "throws":"L", "bats":"L", "team":"TMNT"}' | http POST :3000/api/players "Authorization: Bearer ${access_token}"
+* Routes accessible for all users
+  * http get :3000/api/teams
+  * http get :3000/api/teams/1
+  * http get :3000/api/players
+  * http get :3000/api/players/1
+* Routes accessible for users with 'update' capability (all users except raphael)
+  * echo '{"name":"Purple Clan"}' | http put :3000/api/teams/1
+  * echo '{"name":"Purple Dragons"}' | http patch :3000/api/teams/1
+  * echo '{"name":"Michaelangelo", "position":"SS", "throws":"L", "bats":"L", "team":"TMNT"}' | http put :3000/api/players/1
+  * echo '{"position":"P"}' | http patch :3000/api/players/1
+
 #### Tests
 * How do you run tests?
   * npm run test

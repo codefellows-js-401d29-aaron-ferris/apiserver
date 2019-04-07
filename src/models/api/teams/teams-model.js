@@ -1,6 +1,6 @@
 'use strict';
 
-const Model = require('../mongo-model.js');
+const Model = require('../server/mongo-model.js');
 const schema = require('./teams-schema.js');
 
 /**
