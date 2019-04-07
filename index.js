@@ -1,5 +1,13 @@
 'use strict';
+/**
+ * Model Finder Middleware
+ * @module index.js
+ */
 
+/**
+ * Model Finder Middleware
+ * Initiates the startprocess pulled from app.js
+ */
 require('dotenv').config();
 
 // Start up DB Server

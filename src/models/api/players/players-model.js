@@ -2,7 +2,7 @@
 
 /**
  * Players Model
- * @module models/players/players-model
+ * @module src/models/api/players/players-model
  */
 
 const Model = require('../server/mongo-model.js');

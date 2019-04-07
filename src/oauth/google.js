@@ -1,8 +1,14 @@
 'use strict';
-
+/**
+ * teams schema
+ * @module src/models/api/oauth/google.js
+ */
 const superagent = require('superagent');
 const Users = require('../models/auth/users/users-model.js');
-
+/**
+ * authorize function
+ * this function uses the users model and takes a look. Sets up the header and the body for authorization.
+ */
 const authorize = (req) => {
 
   let code = req.query.code;

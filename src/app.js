@@ -1,5 +1,18 @@
 'use strict';
+/**
+ * APP
+ * @module /src/app.js
+ */
 
+/**
+ * app middleware
+ * compiles all of the information from the routers
+ * if none of the routers are run, run the 404 error
+ * if a router is run but has an error, run the 500 error
+ * @param req {object} Express Request Object
+ * @param res {object} Express Response Object
+ * @param next {function} Express middleware next()
+ */
 // 3rd Party Resources
 const express = require('express');
 const cors = require('cors');
@@ -41,6 +54,9 @@ app.use(errorHandler);
 
 let isRunning = false;
 
+/**
+ * Exports the function for running the app to the front page
+ */
 module.exports = {
   server: app,
   start: (port) => {

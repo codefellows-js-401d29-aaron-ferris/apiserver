@@ -2,7 +2,7 @@
 
 /**
  * Players Schema
- * @module models/players/players-schema
+ * @module src/models/api/players/players-schema
  */
 
 const mongoose = require('mongoose');

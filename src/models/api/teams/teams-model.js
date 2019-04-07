@@ -1,5 +1,8 @@
 'use strict';
-
+/**
+ * teams Model
+ * @module src/models/api/teams/teams-model
+ */
 const Model = require('../server/mongo-model.js');
 const schema = require('./teams-schema.js');
 

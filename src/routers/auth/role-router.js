@@ -1,5 +1,13 @@
 'use strict';
+/**
+ * Role router Middleware
+ * @module src/routers/auth/role-router.js
+ */
 
+/**
+ * Model Finder Middleware
+ * Initiates the startprocess pulled from app.js
+ */
 const express = require('express');
 const rolesRouter = express.Router();
 const Role = require('../../models/auth/roles/roles-model.js');

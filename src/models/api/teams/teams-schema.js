@@ -1,5 +1,8 @@
 'use strict';
-
+/**
+ * teams schema
+ * @module src/models/api/teams/teams-schema
+ */
 const players = require('../players/players-schema.js');
 const mongoose = require('mongoose');
 require('mongoose-schema-jsonschema')(mongoose);

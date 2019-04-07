@@ -1,5 +1,9 @@
 'use strict';
-
+/**
+ * Mong Model
+ * @module src/models/api/server/mongo-model
+ * for each mongo collection defines get post put and delete
+ */
 class Model {
 
   constructor(schema) {

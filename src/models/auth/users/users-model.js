@@ -1,5 +1,8 @@
 'use strict';
-
+/**
+ * users model schema
+ * @module src/models/api/auth/users/users-model
+ */
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -37,7 +40,10 @@ const capabilities = {
   editor: ['create', 'read', 'update'],
   user: ['read'],
 };
-
+/**
+ * @name users.pre
+ * before the user does stuff the password is hashed
+ */
 users.pre('save', function(next) {
   bcrypt.hash(this.password, 10)
     .then(hashedPassword => {
@@ -46,7 +52,11 @@ users.pre('save', function(next) {
     })
     .catch(error => {throw new Error(error);});
 });
-
+/**
+ * @name users.statics.createFromOauth
+ * uses emai. without email runs a validation error
+ * finds the email or creates the email
+ */
 users.statics.createFromOauth = function(email) {
 
   if(! email) { return Promise.reject('Validation Error'); }
@@ -63,7 +73,12 @@ users.statics.createFromOauth = function(email) {
     });
 
 };
-
+/**
+ * @name users.statics.authenticateToken
+ * uses token
+ * if token is in used tokens, reject it
+ * verifiys the parsed tokens with a key and returns the query or invalid token
+ */
 users.statics.authenticateToken = function(token) {
   
   if ( usedTokens.has(token ) ) {
@@ -78,19 +93,28 @@ users.statics.authenticateToken = function(token) {
   } catch(e) { throw new Error('Invalid Token'); }
   
 };
-
+/**
+ * @name users.statics.authenticateBasic
+ * defines the authenticate basic
+ */
 users.statics.authenticateBasic = function(auth) {
   let query = {username:auth.username};
   return this.findOne(query)
     .then( user => user && user.comparePassword(auth.password) )
     .catch(error => {throw error;});
 };
-
+/**
+ * @name users.statics.comparePassword
+ * compares password to check correctness
+ */
 users.methods.comparePassword = function(password) {
   return bcrypt.compare( password, this.password )
     .then( valid => valid ? this : null);
 };
-
+/**
+ * @name users.statics.generateToken
+ * adds a generate token method
+ */
 users.methods.generateToken = function(type) {
   
   let token = {
@@ -114,5 +138,7 @@ users.methods.can = function(capability) {
 users.methods.generateKey = function() {
   return this.generateToken('key');
 };
-
+/**
+ * exports users
+ */
 module.exports = mongoose.model('users', users);

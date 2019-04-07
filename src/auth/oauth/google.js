@@ -1,8 +1,20 @@
 'use strict';
-
+/**
+ * Google Oauth
+ * @module /src/auth/oauth/google.js
+ */
 const superagent = require('superagent');
 const Users = require('../../models/auth/users/users-model');
 
+/**
+ * Authorization process
+ * takes in request, and goes through a process
+ * posts an auth token
+ * Sends extra information as authorization code through
+ * once getting a response back it contains a access token
+ * once it gets the token, it sets the header, and attatches a token, returning useragain the google user
+ * creates from oauth a new user, and then generates a token for the real user
+ */
 const authorize = (req) => {
 
   let code = req.query.code;
