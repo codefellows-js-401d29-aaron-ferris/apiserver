@@ -1,42 +1,78 @@
-
-![CF](http://i.imgur.com/7v5ASc8.png) LAB 15
+![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## API SERVER
-xa
-### Author: Erin Trainor & Aaron Ferris
+## API Server
+
+### Author: Erin Trainor and Aaron Ferris
+[![Build Status](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14.svg?branch=submission)](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14)
 
 ### Links and Resources
-* [pull request](pullrequest)
-* [travis]()
-* [front-end](https://codesandbox.io/s/w638oyk7o8)
+* [repo](https://github.com/401-advanced-javascript-401d29/lab-14/pull/1)
+* [travis](https://www.travis-ci.com/401-advanced-javascript-401d29/lab-14)
+* [back-end](https://api-auth-server-401javascript.herokuapp.com/)
 
 #### Documentation
-* [swagger](./docs/swagger.json)
-* [jsdoc]()
+* [jsdoc](https://api-auth-server-401javascript.herokuapp.com/docs)
+
 
 ### Setup
+#### `.env` requirements
+* `PORT` - 3000
+* `MONGODB_URI` - MONGODB_URI=MONGODB_URI=mongodb://localhost:27017/users
+* `SECRET` - TMNT
+* Add a role
+  * echo '{"role":"superuser", "capabilities":["create","read","update","delete", "superuser"]}' | http :3000/roles
+  * echo '{"role":"admin", "capabilities":["create","read","update","delete"]}' | http :3000/roles
+  * echo '{"role":"editor", "capabilities":["create", "read", "update"]}' | http :3000/roles
+  * echo '{"role":"user", "capabilities":["read"]}' | http :3000/roles
 
+#### Running the app
+* To run Mongo
+  * Open 3 terminal tabs
+    * First tab
+      * mongod --dbpath=/Users/erintrainor/codefellows/data/db (substitute your file path)
+      * Second tab
+        * mongo
+      * Third tab
+        * nodemon
+  
+#### Terminal commands to manipulate databaes
+* Add a User
+  * echo '{"username":"michelangelo", "password":"michelangelo", "role":"superuser"}' | http post :3000/signup
+  * echo '{"username":"leonardo", "password":"leonardo", "role":"admin"}' | http post :3000/signup
+  * echo '{"username":"donatello", "password":"donatello", "role":"editor"}' | http post :3000/signup
+  * echo '{"username":"raphael", "password":"raphael", "role":"user"}' | http post :3000/signup
+* Sign-In
+  * http post :3000/signin -a michelangelo:michelangelo
+  * http post :3000/signin -a leonardo:leonardo
+  * http post :3000/signin -a donatello:donatello
+  * http post :3000/signin -a raphael:raphael
+* Add a team (after signing-in) - The signed in user must have create permission (all users except raphael)
+  * echo '{"name":"TMNT"}' | http POST :3000/api/teams "Authorization: Bearer ${access_token}"
+  * echo '{"name":"Foot Clan"}' | http POST :3000/api/teams "Authorization: Bearer ${access_token}"
+* Add a player (after signing-in) - The signed in user must have create permission
+  * echo '{"name":"Shredder", "position":"P", "throws":"R", "bats":"R", "team":"Foot Clan"}' | http POST :3000/api/players "Authorization: Bearer ${access_token}"
+  * echo '{"name":"April", "position":"SS", "throws":"L", "bats":"L", "team":"TMNT"}' | http POST :3000/api/players "Authorization: Bearer ${access_token}"
+* Routes accessible for all users
+  * http get :3000/api/teams
+  * http get :3000/api/teams/1
+  * http get :3000/api/players
+  * http get :3000/api/players/1
+* Routes accessible for users with 'update' capability (all users except raphael)
+  * echo '{"name":"Purple Clan"}' | http put :3000/api/teams/1 "Authorization: Bearer ${access_token}"
+  * echo '{"name":"Purple Dragons"}' | http patch :3000/api/teams/1 "Authorization: Bearer ${access_token}"
+  * echo '{"name":"Michaelangelo", "position":"SS", "throws":"L", "bats":"L", "team":"TMNT"}' | http put :3000/api/players/1 "Authorization: Bearer ${access_token}"
+  * echo '{"position":"P"}' | http patch :3000/api/players/1 "Authorization: Bearer ${access_token}"
+* Routes accessible for users with 'delete'capability (only leonardo and michelangelo) 
+  * http delete :3000/api/teams/1 "Authorization: Bearer ${access_token}"
+  * http delete :3000/api/players/1 "Authorization: Bearer ${access_token}"
+#### Tests
+* How do you run tests?
+  * npm run test
+* What assertions were made?
+  * Only what is part of the sample code
+* What assertions need to be / should be made?
+  * additional things
 
-
-
-
-#### Terminal Commands to Manipulate the API
-* Categories
-  * `/categories`  
-    * `GET` - http GET :3000/categories
-    * `POST` - echo '{"name":"Footwear", "display_name":"Footwear", "description":"Unusual things to wear on your feet"}' | http POST :3000/categories
-    * `POST` - echo '{"name":"Pet", "display_name":"Pet Products", "description":"Strang things your pet will love"}' | http POST :3000/categories
-  * `/categories/:id/` 
-    * `PUT` - echo '{"name":"Footwear", "display_name":"Shoes", "description":"Unusual thingsto wear on your feet", "_id":"1}' | http PUT :3000/categories/1
-    * `DELETE` - http DELETE :3000/categories/1
-* Products
-  * `/products`  
-    * `GET` - http GET :3000/products
-    * `POST` - echo '{"name":"Bread Slippers", "display_name":"Loafers", "description":"When you want your feet to look like a loaf of bread", "category":"Footwear"}' | http POST :3000/products
-    * `POST` - echo '{"name":"Dog Socks", "display_name":"Paw Grip Socks", "description":"For when you want your dog to be able to run on slick surfaces", "category":"Pet"}' | http POST :3000/products
-  * `/products/:id/` 
-    * `PUT` - echo '{"name":"Dog Socks", "display_name":"Paw Grip Socks", "description":"For when you want your dog to be able to dance on slick surfaces", "category":"Pet", "_id":2}' | http PUT :3000/products/2
-    * `DELETE` - http DELETE :3000/products/2
-  #### Start the app
-  * run json-server --watch= ./data/db.json from the root then go to the front end to see swagger working.
+#### UML
+![UML Diagram](assets/uml.jpg)
