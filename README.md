@@ -59,11 +59,13 @@
   * http get :3000/api/players
   * http get :3000/api/players/1
 * Routes accessible for users with 'update' capability (all users except raphael)
-  * echo '{"name":"Purple Clan"}' | http put :3000/api/teams/1
-  * echo '{"name":"Purple Dragons"}' | http patch :3000/api/teams/1
-  * echo '{"name":"Michaelangelo", "position":"SS", "throws":"L", "bats":"L", "team":"TMNT"}' | http put :3000/api/players/1
-  * echo '{"position":"P"}' | http patch :3000/api/players/1
-
+  * echo '{"name":"Purple Clan"}' | http put :3000/api/teams/1 "Authorization: Bearer ${access_token}"
+  * echo '{"name":"Purple Dragons"}' | http patch :3000/api/teams/1 "Authorization: Bearer ${access_token}"
+  * echo '{"name":"Michaelangelo", "position":"SS", "throws":"L", "bats":"L", "team":"TMNT"}' | http put :3000/api/players/1 "Authorization: Bearer ${access_token}"
+  * echo '{"position":"P"}' | http patch :3000/api/players/1 "Authorization: Bearer ${access_token}"
+* Routes accessible for users with 'delete'capability (only leonardo and michelangelo) 
+  * http delete :3000/api/teams/1 "Authorization: Bearer ${access_token}"
+  * http delete :3000/api/players/1 "Authorization: Bearer ${access_token}"
 #### Tests
 * How do you run tests?
   * npm run test
