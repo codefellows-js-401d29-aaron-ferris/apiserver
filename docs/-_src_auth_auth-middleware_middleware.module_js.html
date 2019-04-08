@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: error-middleware/404.js</title>
+    <title>JSDoc: Module: js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,37 +17,165 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: error-middleware/404.js</h1>
+    <h1 class="page-title">Module: js</h1>
 
     
 
 
 
-    
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>'use strict';
-/**
- * 404 Middleware
- * @module src/error-middleware/404
- */
 
-/**
- * Sends a JSON Formatted 404 Response
- * @param req {object} Express Request Object
- * @param res {object} Express Response Object
- * @param next {function} Express middleware next()
- */
-module.exports = (req, res, next) => {
-  let error = { error: 'Resource Not Found' };
-  res
-    .status(404)
-    .json(error)
-    .end();
-};
-</code></pre>
-        </article>
-    </section>
+<section>
+
+<header>
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">Middleware Router Middleware</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth-middleware_middleware.js.html">auth-middleware/middleware.js</a>, <a href="auth-middleware_middleware.js.html#line2">line 2</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
+            
+<h4 class="name" id="~User"><span class="type-signature">(inner, constant) </span>User<span class="type-signature"></span></h4>
+
+
+
+
+<div class="description">
+    Model Finder Middleware
+Exports the capability.
+toggles basic, bearer, and error
+defines what type of authorization
+</div>
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="auth-middleware_middleware.js.html">auth-middleware/middleware.js</a>, <a href="auth-middleware_middleware.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: error-middleware/404.js</title>
+    <title>JSDoc: Source: models/api/server/mongo-model.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: error-middleware/404.js</h1>
+    <h1 class="page-title">Source: models/api/server/mongo-model.js</h1>
 
     
 
@@ -28,23 +28,37 @@
         <article>
             <pre class="prettyprint source linenums"><code>'use strict';
 /**
- * 404 Middleware
- * @module src/error-middleware/404
+ * Mong Model
+ * @module src/models/api/server/mongo-model
+ * for each mongo collection defines get post put and delete
  */
+class Model {
 
-/**
- * Sends a JSON Formatted 404 Response
- * @param req {object} Express Request Object
- * @param res {object} Express Response Object
- * @param next {function} Express middleware next()
- */
-module.exports = (req, res, next) => {
-  let error = { error: 'Resource Not Found' };
-  res
-    .status(404)
-    .json(error)
-    .end();
-};
+  constructor(schema) {
+    this.schema = schema;
+  }
+
+  get(_id) {
+    let queryObject = _id ? {_id} : {};
+    return this.schema.find(queryObject);
+  }
+  
+  post(record) {
+    let newRecord = new this.schema(record);
+    return newRecord.save();
+  }
+
+  put(_id, record) {
+    return this.schema.findByIdAndUpdate(_id, record, {new:true});
+  }
+
+  delete(_id) {
+    return this.schema.findByIdAndDelete(_id);
+  }
+
+}
+
+module.exports = Model;
 </code></pre>
         </article>
     </section>
