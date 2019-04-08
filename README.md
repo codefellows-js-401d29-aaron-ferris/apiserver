@@ -13,7 +13,7 @@
 
 #### Documentation
 * [jsdoc](https://api-auth-server-401javascript.herokuapp.com/docs)
-* [swagger](https://api-auth-server-401javascript.herokuapp.com/doc)]
+* [swagger](https://api-auth-server-401javascript.herokuapp.com/doc)
 
 
 ### Setup
